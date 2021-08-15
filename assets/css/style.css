@@ -1,0 +1,55 @@
+* {
+    font-family: Helvetica, Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(231, 225, 225);
+}
+
+header {
+    display: flex;
+    justify-content: space-around;
+    align-content: center;
+    background-color: gray;
+    height: auto;
+}
+
+h1 {
+    font-size: 40px;
+    font-weight: bold;
+    display:flex;
+    justify-content: center;
+    align-content: center;   
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 500px;
+    width: 100%;
+}
+
+.userBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    height: 500px;
+    width: 500px;
+}
+
+.answers {
+    display: flex;
+    flex-direction: column;
+
+}
+
+button {
+    width: 30%;
+    margin: 10px 0px;
+    float: left;
+}
+
