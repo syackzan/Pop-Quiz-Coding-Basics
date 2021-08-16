@@ -65,9 +65,11 @@ function updatingScore (input){
 function highScoreForm (){
     headerOne.textContent = "High Scores";
     enterIn.textContent = ""
+    startButton.style.display = "none"
     input.style.display = "none";
     submitB.style.display = "none";
     reveal.style.display = "none";
+    description.textContent = "";
     description.appendChild (ol);
     description.style.flexDirection = "column";
     answerBox.appendChild(resetB);
