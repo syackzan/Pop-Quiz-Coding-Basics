@@ -24,6 +24,9 @@ var reveal = document.createElement ("p");
 var enterIn = document.createElement("p");
 var input = document.createElement ("input");
 var submitB = document.createElement ("input");
+var resetB = document.createElement ("button");
+var clearScoreB = document.createElement ("button");
+var inputingScore = document.createElement ("li");
 
 
 // Functions //
@@ -50,9 +53,33 @@ function timerCountdown (){
     }, 1000);
 }
 
+// Updating Score //
+function updatingScore (input){
+    description.appendChild (inputingScore);
+    inputingScore.textContent = "Initials: " + input.value + " Time: " + timer;
+}
+
+// Changin to High Score View //
+function highScoreForm (){
+    headerOne.textContent = "High Scores";
+    enterIn.textContent = ""
+    input.style.display = "none";
+    submitB.style.display = "none";
+    reveal.style.display = "none";
+    answerBox.appendChild(resetB);
+    answerBox.appendChild(clearScoreB);
+    answerBox.setAttribute ("style", "flex-direction: row; justify-content: center; border-bottom: solid 1px gray")
+    resetB.textContent = "Play Again!";
+    clearScoreB.textContent = "Reset Scores";
+    description.style.justifyContent = "center";
+
+}
+
 // Changing to Save Score Form //
 function changeForm (){
     answerBox.setAttribute ("style", "flex-direction: row; justify-content: flex-start; border-bottom: solid 1px gray");
+    answerBox.style.justifyContent = "flex-start";
+    answerBox.style.flexDirection = "row";
     description.style.display = "visible";
     description.textContent = "Your Final score is " + timer;
 
@@ -69,6 +96,22 @@ function changeForm (){
     submitB.setAttribute ("type", "submit");
     submitB.setAttribute ("value", "Submit");
     submitB.setAttribute ("style", "margin: 0px 10px; font-size: 24px; background-color: purple; color: white");
+
+    console.log (input.value); 
+}
+
+// View High Scores Menu //
+function viewHighScores (input){
+    
+               
+    // Removing Buttons From HTML //
+    highScoreForm ();
+    updatingScore (input);
+    
+    event.stopPropagation()
+    submitB.addEventListener("click", function (){
+    //viewHighScores (event);
+    });
 }
 
 // End saveScore Menu //
@@ -78,28 +121,20 @@ function storeScore (event){
 
     if (element.matches("button")){
 
-       clearInterval(timerInterval);
-        if (element.value == "true"){
-            //scoreCount++;
-            //count.textContent = "Answered Correct: " + scoreCount;
-        } else {
-            //timer = timer - 10;
-            //timerHTML.textContent = "Timer: " + timer;
-        }
+        clearInterval(timerInterval);
+        // Removing Buttons From HTML //
+        headerOne.textContent = "All Done!";
+        button1.style.display = "none";
+        button2.style.display = "none";
+        button3.style.display = "none";
+        button4.style.display = "none";
         
-    // Removing Buttons From HTML //
-    headerOne.textContent = "All Done!";
-    button1.style.display = "none";
-    button2.style.display = "none";
-    button3.style.display = "none";
-    button4.style.display = "none";
-    
-    changeForm ();
+        changeForm ();
     }
 
     event.stopPropagation()
-    answerBox.addEventListener("click", function (event){
-    storeScore (event);
+    submitB.addEventListener("click", function (){
+    viewHighScores (input);
     })
     
 }

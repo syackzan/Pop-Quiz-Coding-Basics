@@ -67,7 +67,7 @@ h1 {
 button {
     display:inline-block;
     width: fit-content;
-    margin: 10px 0px;
+    margin: 10px 10px;
     font-size: 24px;
     background-color: purple;
     color: white;
