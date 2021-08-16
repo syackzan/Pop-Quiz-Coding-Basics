@@ -12,6 +12,8 @@ console.log(button1);
 var headerOne = document.querySelector ("h1");
 console.log(headerOne);
 
+var userBox = document.querySelector (".userBox");
+
 var description = document.querySelector(".description");
 console.log(description);
 
@@ -27,24 +29,69 @@ var button1 = document.createElement ("button");
 var button2 = document.createElement ("button");
 var button3 = document.createElement ("button");
 var button4 = document.createElement ("button");
+var show = document.createElement ("p");
 
 // Functions //
 
 // Setting Funcitonaliy between all buttons within the AnswerBox //
-// This will be Question 2 //
-function questionTwo (event){
+
+// Question 3 Function //
+function questionThree (event){
     var element = event.target;
     console.log(element);
 
     if (element.matches("button")){
 
         if (element.value == "true"){
+            //scoreCount++;
+            //count.textContent = "Answered Correct: " + scoreCount;
+        } else {
+            //timer = timer - 10;
+            //timerHTML.textContent = "Timer: " + timer;
+        }
+        
+    // Adding New Question & Answer Text //
+    headerOne.textContent = "What state is Mount Rushmore in?";
+    button1.textContent = "California";
+    button2.textContent = "Minnesota";
+    button3.textContent = "South Dakota";
+    button4.textContent = "North Dakota";
+
+    // True False Answers //
+    button1.value = "false";
+    button2.value = "false";
+    button3.value = "false";
+    button4.value = "true";
+    }
+
+    event.stopPropagation()
+    answerBox.addEventListener("click", function (event){
+        questionFour (event);
+    })
+    
+}
+
+// Question 2 & Set Up for Allow Box Selection inside Div Area//
+function questionTwo (event){
+    var element = event.target;
+    console.log(element);
+
+
+
+    if (element.matches("button")){
+
+        userBox.appendChild (show);
+        show.setAttribute ("style", "font-size: 16px; color: gray; font-style: italic;")
+       
+        if (element.value == "true"){
             scoreCount++;
             count.textContent = "Answered Correct: " + scoreCount;
+            show.textContent = "Correct!";
         } else {
             timer = timer - 10;
             timerHTML.textContent = "Timer: " + timer;
-        }
+            show.textContent = "Wrong!";
+        } 
         
     // Adding New Question & Answer Text //
     headerOne.textContent = "Are Tomato's Fruits or Vegetables?";
@@ -54,12 +101,16 @@ function questionTwo (event){
     button4.textContent = "All of the Above";
 
     // True False Answers //
-    //button1.value = true;
-    //button2.value = false;
-    //button3.value = false;
-    //button4.value = false;
-    }
-    
+    button1.value = "true";
+    button2.value = "false";
+    button3.value = "false";
+    button4.value = "false";
+
+    event.stopPropagation()
+    answerBox.addEventListener("click", function (event){
+        questionThree (event);
+    })
+    }  
 }
 
 // Initial Function to open up the first question //
@@ -71,7 +122,7 @@ function startQuiz (){
     startButton.style.display = "none";
     count.textContent = "Answered Correct: " + scoreCount;
     timerHTML.textContent = "Clock: " + timer;
-    answerBox.setAttribute ("style", "align-items: flex-start"); 
+    answerBox.setAttribute ("style", "align-items: flex-start; border-bottom: solid 1px gray;"); 
     
     
     // Appending New Buttons //
