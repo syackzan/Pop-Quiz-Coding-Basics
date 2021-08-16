@@ -2,7 +2,7 @@ console.log("Hello");
 
 // Global Variables //
 var scoreCount = 0;
-var timer = 75;
+var timer = 15;
 
 // querySelectors with Console Logs to Confirm if retreivals are workings //
 // Storing the Start Button into Button1 //
@@ -208,9 +208,17 @@ function questionTwo (event){
             count.textContent = "Answered Correct: " + scoreCount;
             reveal.textContent = "Correct!";
         } else {
-            timer = timer - 10;
-            timerHTML.textContent = "Timer: " + timer;
-            reveal.textContent = "Wrong!";
+            
+            if (timer >= 10){
+                timer = timer - 10;
+                timerHTML.textContent = "Count: " + timer;
+                reveal.textContent = "Wrong!";
+            } else {
+                timer = 0;
+                timerHTML.textContent = "Count: " + timer;
+
+            }
+            
         } 
         
     // Adding New Question & Answer Text //
@@ -278,5 +286,17 @@ function startQuiz (){
 
 startButton.addEventListener ("click", function () {
     startQuiz ();
+    var timerInterval = setInterval (function () {
+        
+        if (timer > 0){
+        timer--
+        timerHTML.textContent = "Count: " + timer;
+        }
+
+        if (timer <= 0){
+            clearInterval (timerInterval);
+            alert("Fail");
+        }
+    }, 1000);
 });
    
