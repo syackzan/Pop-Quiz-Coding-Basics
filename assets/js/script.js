@@ -20,7 +20,7 @@ console.log(answerBox);
 
 var count = document.querySelector(".count");
 
-var timer = document.querySelector(".timer");
+var timerHTML = document.querySelector(".timer");
 
 // Creating Button Children //
 var button1 = document.createElement ("button");
@@ -32,10 +32,19 @@ var button4 = document.createElement ("button");
 
 // Setting Funcitonaliy between all buttons within the AnswerBox //
 // This will be Question 2 //
-function rightOrWrong (event){
+function questionTwo (event){
     var element = event.target;
+    console.log(element);
 
     if (element.matches("button")){
+
+        if (element.value == "true"){
+            scoreCount++;
+            count.textContent = "Answered Correct: " + scoreCount;
+        } else {
+            timer = timer - 10;
+            timerHTML.textContent = "Timer: " + timer;
+        }
         
     // Adding New Question & Answer Text //
     headerOne.textContent = "Are Tomato's Fruits or Vegetables?";
@@ -60,8 +69,8 @@ function startQuiz (){
     headerOne.textContent = "Who is the greatest Coder to ever Walk the Earth?";
     description.style.display = "none";
     startButton.style.display = "none";
-    count.textContent = "Count: " + scoreCount;
-    timer.textContent = "Clock" + timer;
+    count.textContent = "Answered Correct: " + scoreCount;
+    timerHTML.textContent = "Clock: " + timer;
     answerBox.setAttribute ("style", "align-items: flex-start"); 
     
     
@@ -78,23 +87,19 @@ function startQuiz (){
     button4.textContent = "Jeff Bezos";
 
     // True False Answers //
-    button1.value = false;
-    button2.value = true;
-    button3.value = false;
-    button4.value = false;
+    button1.value = "false";
+    button2.value = "true";
+    button3.value = "false";
+    button4.value = "false";
 
-    if ("button" == true){
-        scoreCount++
-    } else {
-        timer
-    }
+    
 
     console.log (button1);
     console.log (button2);
 
     event.stopPropagation()
     answerBox.addEventListener("click", function (event){
-        rightOrWrong (event);
+        questionTwo (event);
     })
     
 }
