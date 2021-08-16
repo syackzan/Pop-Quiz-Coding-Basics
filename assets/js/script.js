@@ -7,21 +7,11 @@ var timer = 75;
 // querySelectors with Console Logs to Confirm if retreivals are workings //
 // Storing the Start Button into Button1 //
 var startButton = document.querySelector ("button");
-console.log(button1);
-
 var headerOne = document.querySelector ("h1");
-console.log(headerOne);
-
 var userBox = document.querySelector (".userBox");
-
 var description = document.querySelector(".description");
-console.log(description);
-
 var answerBox = document.querySelector(".answerBox");
-console.log(answerBox);
-
 var count = document.querySelector(".count");
-
 var timerHTML = document.querySelector(".timer");
 
 // Creating Button Children //
@@ -29,11 +19,140 @@ var button1 = document.createElement ("button");
 var button2 = document.createElement ("button");
 var button3 = document.createElement ("button");
 var button4 = document.createElement ("button");
-var show = document.createElement ("p");
+var reveal = document.createElement ("p");
+var enterIn = document.createElement("p");
+var input = document.createElement ("input");
+var submitB = document.createElement ("input");
+
 
 // Functions //
 
 // Setting Funcitonaliy between all buttons within the AnswerBox //
+
+// Changing to Save Score Form //
+function changeForm (){
+    answerBox.setAttribute ("style", "flex-direction: row; justify-content: flex-start");
+    description.textContent = "Your Final score is " + timer;
+
+    answerBox.appendChild (enterIn);
+    enterIn.textContent = "Enter Your Initials";
+
+    answerBox.appendChild (input);
+    input.setAttribute("type", "text");
+    input.setAttribute ("name", "FullName");
+    input.setAttribute ("placeholder", "Initials");
+    input.style.display = "margin: 0 10px";
+
+    answerBox.appendChild (submitB);
+    submitB.setAttribute ("type", "submit");
+    submitB.setAttribute ("value", "Submit");
+    submitB.style.display = "margin: 0 10px";
+}
+
+// End saveScore Menu //
+function storeScore (event){
+    var element = event.target;
+    console.log(element);
+
+    if (element.matches("button")){
+
+        if (element.value == "true"){
+            //scoreCount++;
+            //count.textContent = "Answered Correct: " + scoreCount;
+        } else {
+            //timer = timer - 10;
+            //timerHTML.textContent = "Timer: " + timer;
+        }
+        
+    // Removing Buttons From HTML //
+    headerOne.textContent = "All Done!";
+    button1.style.display = "none";
+    button2.style.display = "none";
+    button3.style.display = "none";
+    button4.style.display = "none";
+    
+    changeForm ();
+    }
+
+    event.stopPropagation()
+    answerBox.addEventListener("click", function (event){
+        //storeScore (event);
+    })
+    
+}
+
+// Question 5 Function //
+function questionFive (event){
+    var element = event.target;
+    console.log(element);
+
+    if (element.matches("button")){
+
+        if (element.value == "true"){
+            //scoreCount++;
+            //count.textContent = "Answered Correct: " + scoreCount;
+        } else {
+            //timer = timer - 10;
+            //timerHTML.textContent = "Timer: " + timer;
+        }
+        
+    // Adding New Question & Answer Text //
+    headerOne.textContent = "Which country is home to Samurai's?";
+    button1.textContent = "China";
+    button2.textContent = "Japan";
+    button3.textContent = "Canada";
+    button4.textContent = "Korea";
+
+    // True False Answers //
+    button1.value = "false";
+    button2.value = "true";
+    button3.value = "false";
+    button4.value = "false";
+    }
+
+    event.stopPropagation()
+    answerBox.addEventListener("click", function (event){
+        storeScore (event);
+    })
+    
+}
+
+
+// Question 4 Function //
+function questionFour (event){
+    var element = event.target;
+    console.log(element);
+
+    if (element.matches("button")){
+
+        if (element.value == "true"){
+            //scoreCount++;
+            //count.textContent = "Answered Correct: " + scoreCount;
+        } else {
+            //timer = timer - 10;
+            //timerHTML.textContent = "Timer: " + timer;
+        }
+        
+    // Adding New Question & Answer Text //
+    headerOne.textContent = "How many Fingers do we have?";
+    button1.textContent = "Five";
+    button2.textContent = "Twenty";
+    button3.textContent = "Ten";
+    button4.textContent = "One";
+
+    // True False Answers //
+    button1.value = "false";
+    button2.value = "false";
+    button3.value = "true";
+    button4.value = "false";
+    }
+
+    event.stopPropagation()
+    answerBox.addEventListener("click", function (event){
+        questionFive (event);
+    })
+    
+}
 
 // Question 3 Function //
 function questionThree (event){
@@ -80,17 +199,17 @@ function questionTwo (event){
 
     if (element.matches("button")){
 
-        userBox.appendChild (show);
-        show.setAttribute ("style", "font-size: 16px; color: gray; font-style: italic;")
+        userBox.appendChild (reveal);
+        reveal.setAttribute ("style", "font-size: 16px; color: gray; font-style: italic;")
        
         if (element.value == "true"){
             scoreCount++;
             count.textContent = "Answered Correct: " + scoreCount;
-            show.textContent = "Correct!";
+            reveal.textContent = "Correct!";
         } else {
             timer = timer - 10;
             timerHTML.textContent = "Timer: " + timer;
-            show.textContent = "Wrong!";
+            reveal.textContent = "Wrong!";
         } 
         
     // Adding New Question & Answer Text //
