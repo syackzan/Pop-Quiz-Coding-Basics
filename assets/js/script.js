@@ -31,22 +31,23 @@ var submitB = document.createElement ("input");
 
 // Changing to Save Score Form //
 function changeForm (){
-    answerBox.setAttribute ("style", "flex-direction: row; justify-content: flex-start");
+    answerBox.setAttribute ("style", "flex-direction: row; justify-content: flex-start; border-bottom: solid 1px gray");
+    description.style.display = "visible";
     description.textContent = "Your Final score is " + timer;
 
     answerBox.appendChild (enterIn);
-    enterIn.textContent = "Enter Your Initials";
+    enterIn.textContent = "Enter Your Initials:";
 
     answerBox.appendChild (input);
     input.setAttribute("type", "text");
     input.setAttribute ("name", "FullName");
     input.setAttribute ("placeholder", "Initials");
-    input.style.display = "margin: 0 10px";
+    input.setAttribute ("style", "margin: 0px 10px");
 
     answerBox.appendChild (submitB);
     submitB.setAttribute ("type", "submit");
     submitB.setAttribute ("value", "Submit");
-    submitB.style.display = "margin: 0 10px";
+    submitB.setAttribute ("style", "margin: 0px 10px; font-size: 24px; background-color: purple; color: white");
 }
 
 // End saveScore Menu //
@@ -76,7 +77,7 @@ function storeScore (event){
 
     event.stopPropagation()
     answerBox.addEventListener("click", function (event){
-        //storeScore (event);
+    storeScore (event);
     })
     
 }
@@ -237,7 +238,8 @@ function startQuiz (){
 
     // Changing Initial HTML Elements to Quiz Format //
     headerOne.textContent = "Who is the greatest Coder to ever Walk the Earth?";
-    description.style.display = "none";
+    description.textContent = " ";
+    description.setAttribute ("style", "margin: 0px; border: none");
     startButton.style.display = "none";
     count.textContent = "Answered Correct: " + scoreCount;
     timerHTML.textContent = "Clock: " + timer;
