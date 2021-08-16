@@ -1,9 +1,12 @@
 console.log("Hello");
 
-// querySelectors with Console Logs to Confirm if retreivals are workings //
+// Global Variables //
+var scoreCount = 0;
+var timer = 75;
 
+// querySelectors with Console Logs to Confirm if retreivals are workings //
 // Storing the Start Button into Button1 //
-var button1 = document.querySelector ("button");
+var startButton = document.querySelector ("button");
 console.log(button1);
 
 var headerOne = document.querySelector ("h1");
@@ -15,11 +18,40 @@ console.log(description);
 var answerBox = document.querySelector(".answerBox");
 console.log(answerBox);
 
-// Creating Button Children //
+var count = document.querySelector(".count");
 
+var timer = document.querySelector(".timer");
+
+// Creating Button Children //
+var button1 = document.createElement ("button");
 var button2 = document.createElement ("button");
 var button3 = document.createElement ("button");
 var button4 = document.createElement ("button");
+
+// Functions //
+
+// Setting Funcitonaliy between all buttons within the AnswerBox //
+// This will be Question 2 //
+function rightOrWrong (event){
+    var element = event.target;
+
+    if (element.matches("button")){
+        
+    // Adding New Question & Answer Text //
+    headerOne.textContent = "Are Tomato's Fruits or Vegetables?";
+    button1.textContent = "Fruits";
+    button2.textContent = "Vegetables";
+    button3.textContent = "Shut Up";
+    button4.textContent = "All of the Above";
+
+    // True False Answers //
+    //button1.value = true;
+    //button2.value = false;
+    //button3.value = false;
+    //button4.value = false;
+    }
+    
+}
 
 // Initial Function to open up the first question //
 function startQuiz (){
@@ -27,9 +59,14 @@ function startQuiz (){
     // Changing Initial HTML Elements to Quiz Format //
     headerOne.textContent = "Who is the greatest Coder to ever Walk the Earth?";
     description.style.display = "none";
+    startButton.style.display = "none";
+    count.textContent = "Count: " + scoreCount;
+    timer.textContent = "Clock" + timer;
     answerBox.setAttribute ("style", "align-items: flex-start"); 
     
+    
     // Appending New Buttons //
+    answerBox.appendChild (button1);
     answerBox.appendChild (button2);
     answerBox.appendChild (button3);
     answerBox.appendChild (button4);
@@ -38,10 +75,31 @@ function startQuiz (){
     button1.textContent = "Steve Jobs";
     button2.textContent = "Mark Zuckerberg";
     button3.textContent = "Elon Musk";
-    button4.textContent = "Jeff Bezos"
+    button4.textContent = "Jeff Bezos";
+
+    // True False Answers //
+    button1.value = false;
+    button2.value = true;
+    button3.value = false;
+    button4.value = false;
+
+    if ("button" == true){
+        scoreCount++
+    } else {
+        timer
+    }
+
+    console.log (button1);
+    console.log (button2);
+
+    event.stopPropagation()
+    answerBox.addEventListener("click", function (event){
+        rightOrWrong (event);
+    })
+    
 }
 
-button1.addEventListener ("click", function () {
+startButton.addEventListener ("click", function () {
     startQuiz ();
 });
    
