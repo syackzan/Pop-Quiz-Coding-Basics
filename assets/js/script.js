@@ -2,7 +2,8 @@ console.log("Hello");
 
 // Global Variables //
 var scoreCount = 0;
-var timer = 15;
+var timer = 150;
+var timerInterval;
 
 // querySelectors with Console Logs to Confirm if retreivals are workings //
 // Storing the Start Button into Button1 //
@@ -28,6 +29,26 @@ var submitB = document.createElement ("input");
 // Functions //
 
 // Setting Funcitonaliy between all buttons within the AnswerBox //
+
+// Timer Countdown //
+function timerCountdown (){
+    timerInterval = setInterval (function () {
+        
+        if (timer > 0){
+        timer--
+        timerHTML.textContent = "Timer: " + timer;
+        }
+    
+        if (timer <= 0){
+            clearInterval (timerInterval);
+            alert("Fail");
+        }
+
+        if (timer.value === "true"){
+            clearInterval(timerInterval);
+        }
+    }, 1000);
+}
 
 // Changing to Save Score Form //
 function changeForm (){
@@ -57,6 +78,7 @@ function storeScore (event){
 
     if (element.matches("button")){
 
+       clearInterval(timerInterval);
         if (element.value == "true"){
             //scoreCount++;
             //count.textContent = "Answered Correct: " + scoreCount;
@@ -211,11 +233,11 @@ function questionTwo (event){
             
             if (timer >= 10){
                 timer = timer - 10;
-                timerHTML.textContent = "Count: " + timer;
+                timerHTML.textContent = "Timer: " + timer;
                 reveal.textContent = "Wrong!";
             } else {
                 timer = 0;
-                timerHTML.textContent = "Count: " + timer;
+                timerHTML.textContent = "Timer: " + timer;
 
             }
             
@@ -250,7 +272,7 @@ function startQuiz (){
     description.setAttribute ("style", "margin: 0px; border: none");
     startButton.style.display = "none";
     count.textContent = "Answered Correct: " + scoreCount;
-    timerHTML.textContent = "Clock: " + timer;
+    timerHTML.textContent = "Timer: " + timer;
     answerBox.setAttribute ("style", "align-items: flex-start; border-bottom: solid 1px gray;"); 
     
     
@@ -286,17 +308,6 @@ function startQuiz (){
 
 startButton.addEventListener ("click", function () {
     startQuiz ();
-    var timerInterval = setInterval (function () {
-        
-        if (timer > 0){
-        timer--
-        timerHTML.textContent = "Count: " + timer;
-        }
-
-        if (timer <= 0){
-            clearInterval (timerInterval);
-            alert("Fail");
-        }
-    }, 1000);
+    timerCountdown();
 });
    
