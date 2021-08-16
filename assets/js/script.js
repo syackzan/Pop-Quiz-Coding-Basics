@@ -27,6 +27,7 @@ var submitB = document.createElement ("input");
 var resetB = document.createElement ("button");
 var clearScoreB = document.createElement ("button");
 var inputingScore = document.createElement ("li");
+var ol = document.createElement ("ol");
 
 
 // Functions //
@@ -55,7 +56,8 @@ function timerCountdown (){
 
 // Updating Score //
 function updatingScore (input){
-    description.appendChild (inputingScore);
+    ol.appendChild (inputingScore);
+    ol.setAttribute ("style", "list-style-position: inside; margin-left: -30px");
     inputingScore.textContent = "Initials: " + input.value + " Time: " + timer;
 }
 
@@ -66,6 +68,8 @@ function highScoreForm (){
     input.style.display = "none";
     submitB.style.display = "none";
     reveal.style.display = "none";
+    description.appendChild (ol);
+    description.style.flexDirection = "column";
     answerBox.appendChild(resetB);
     answerBox.appendChild(clearScoreB);
     answerBox.setAttribute ("style", "flex-direction: row; justify-content: center; border-bottom: solid 1px gray")
