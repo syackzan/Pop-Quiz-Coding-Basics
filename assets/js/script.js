@@ -29,6 +29,7 @@ var clearScoreB = document.createElement ("button");
 var inputingScore = document.createElement ("li");
 var ol = document.createElement ("ol");
 
+var allScores = []
 
 // Functions //
 
@@ -54,11 +55,40 @@ function timerCountdown (){
     }, 1000);
 }
 
-// Updating Score //
-function updatingScore (input){
+function renderHighS () {
+    var HS = JSON.parse(localStorage.getItem("userInfo"));
+
+    if (HS !== null){
+        allScores = HS;
+    }
+
+    for (var i = 0; i < allScores.length; i++) {
+        var oneScore = allScores[i];
+    
+        var li = document.createElement("li");
+        li.textContent = "Initials: " + oneScore.initials + " Time: " + oneScore.timer;
+
+        ol.appendChild(li);
+      }
+
+    var storedInitials = allScores.initials;
+    var storedScores = allScores.score;
+    
+    description.appendChild (ol);
     ol.appendChild (inputingScore);
     ol.setAttribute ("style", "list-style-position: inside; margin-left: -30px");
-    inputingScore.textContent = "Initials: " + input.value + " Time: " + timer;
+    inputingScore.textContent = "Initials: " + storedInitials + " Time: " + storedScores;
+}
+
+// Updating Score //
+function updatingScore (input){
+
+    var userInfo = {
+        initials: input.value,
+        score: timer
+    }
+    localStorage.setItem("userInfo", JSON.stringify(userInfo));
+    renderHighS ();
 }
 
 // Changin to High Score View //
@@ -109,15 +139,23 @@ function changeForm (){
 // View High Scores Menu //
 function viewHighScores (input){
     
-               
+    //Load Stored High Scores.
+    renderHighS ();
+    
     // Removing Buttons From HTML //
     highScoreForm ();
     updatingScore (input);
     
     event.stopPropagation()
-    submitB.addEventListener("click", function (){
-    //viewHighScores (event);
+    resetB.addEventListener("click", function (){
+    location.reload();
     });
+
+    clearScoreB.addEventListener("click", function (){
+        localStorage.clear();
+        stopPropagation();
+        return;
+    })
 }
 
 // End saveScore Menu //
