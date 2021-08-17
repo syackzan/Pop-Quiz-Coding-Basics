@@ -7,7 +7,7 @@ var timerInterval;
 
 // querySelectors with Console Logs to Confirm if retreivals are workings //
 // Storing the Start Button into Button1 //
-var startButton = document.querySelector ("button");
+var startButton = document.querySelector ("#startButton");
 var headerOne = document.querySelector ("h1");
 var userBox = document.querySelector (".userBox");
 var description = document.querySelector(".description");
@@ -29,7 +29,8 @@ var clearScoreB = document.createElement ("button");
 var inputingScore = document.createElement ("li");
 var ol = document.createElement ("ol");
 
-var allScores = []
+var allScores = [];
+var zzzz = [];
 
 // Functions //
 
@@ -83,11 +84,15 @@ function renderHighS () {
 // Updating Score //
 function updatingScore (input){
 
-    var userInfo = {
-        initials: input.value,
-        score: timer
+    if (input != null){
+        var userInfo = {
+            initials: input.value,
+            score: timer
+        }
+        zzzz.push(userInfo);
+        localStorage.setItem("userInfo", JSON.stringify(zzzz));
     }
-    localStorage.setItem("userInfo", JSON.stringify(userInfo));
+    
     renderHighS ();
 }
 
@@ -140,7 +145,7 @@ function changeForm (){
 function viewHighScores (input){
     
     //Load Stored High Scores.
-    renderHighS ();
+    //renderHighS ();
     
     // Removing Buttons From HTML //
     highScoreForm ();
@@ -153,13 +158,13 @@ function viewHighScores (input){
 
     clearScoreB.addEventListener("click", function (){
         localStorage.clear();
-        stopPropagation();
+        event.stopPropagation();
         return;
     })
 }
 
 // End saveScore Menu //
-function storeScore (event){
+function storeScore (){
     var element = event.target;
     console.log(element);
 
@@ -184,19 +189,11 @@ function storeScore (event){
 }
 
 // Question 5 Function //
-function questionFive (event){
+function questionFive (){
     var element = event.target;
     console.log(element);
 
     if (element.matches("button")){
-
-        if (element.value == "true"){
-            //scoreCount++;
-            //count.textContent = "Answered Correct: " + scoreCount;
-        } else {
-            //timer = timer - 10;
-            //timerHTML.textContent = "Timer: " + timer;
-        }
         
     // Adding New Question & Answer Text //
     headerOne.textContent = "Which country is home to Samurai's?";
@@ -212,28 +209,20 @@ function questionFive (event){
     button4.value = "false";
     }
 
+        event.preventDefault();
     event.stopPropagation()
-    answerBox.addEventListener("click", function (event){
-        storeScore (event);
+    answerBox.addEventListener("click", function (){
+        storeScore ();
     })
     
 }
 
 
 // Question 4 Function //
-function questionFour (event){
+function questionFour (){
     var element = event.target;
-    console.log(element);
 
     if (element.matches("button")){
-
-        if (element.value == "true"){
-            //scoreCount++;
-            //count.textContent = "Answered Correct: " + scoreCount;
-        } else {
-            //timer = timer - 10;
-            //timerHTML.textContent = "Timer: " + timer;
-        }
         
     // Adding New Question & Answer Text //
     headerOne.textContent = "How many Fingers do we have?";
@@ -249,27 +238,19 @@ function questionFour (event){
     button4.value = "false";
     }
 
+    event.preventDefault();
     event.stopPropagation()
-    answerBox.addEventListener("click", function (event){
-        questionFive (event);
+    answerBox.addEventListener("click", function (){
+        questionFive ();
     })
     
 }
 
 // Question 3 Function //
-function questionThree (event){
+function questionThree (){
     var element = event.target;
-    console.log(element);
 
     if (element.matches("button")){
-
-        if (element.value == "true"){
-            //scoreCount++;
-            //count.textContent = "Answered Correct: " + scoreCount;
-        } else {
-            //timer = timer - 10;
-            //timerHTML.textContent = "Timer: " + timer;
-        }
         
     // Adding New Question & Answer Text //
     headerOne.textContent = "What state is Mount Rushmore in?";
@@ -285,9 +266,10 @@ function questionThree (event){
     button4.value = "true";
     }
 
+    event.preventDefault();
     event.stopPropagation()
-    answerBox.addEventListener("click", function (event){
-        questionFour (event);
+    answerBox.addEventListener("click", function (){
+        questionFour ();
     })
     
 }
@@ -295,9 +277,6 @@ function questionThree (event){
 // Question 2 & Set Up for Allow Box Selection inside Div Area//
 function questionTwo (event){
     var element = event.target;
-    console.log(element);
-
-
 
     if (element.matches("button")){
 
@@ -335,16 +314,18 @@ function questionTwo (event){
     button3.value = "false";
     button4.value = "false";
 
+    
     event.stopPropagation()
-    answerBox.addEventListener("click", function (event){
-        questionThree (event);
+    answerBox.addEventListener("click", function (){
+        questionThree ();
     })
     }  
 }
 
 // Initial Function to open up the first question //
 function startQuiz (){
-
+    
+    
     // Changing Initial HTML Elements to Quiz Format //
     headerOne.textContent = "Who is the greatest Coder to ever Walk the Earth?";
     description.textContent = " ";
@@ -366,6 +347,8 @@ function startQuiz (){
     button2.textContent = "Mark Zuckerberg";
     button3.textContent = "Elon Musk";
     button4.textContent = "Jeff Bezos";
+    console.log(button1);
+    console.log(button2);
 
     // True False Answers //
     button1.value = "false";
@@ -374,19 +357,16 @@ function startQuiz (){
     button4.value = "false";
 
     
-
-    console.log (button1);
-    console.log (button2);
-
-    event.stopPropagation()
+    //event.stopPropagation();
     answerBox.addEventListener("click", function (event){
         questionTwo (event);
     })
     
 }
 
-startButton.addEventListener ("click", function () {
+//Start Button//
+startButton.addEventListener ("click", function(){
     startQuiz ();
     timerCountdown();
-});
+  });
    
