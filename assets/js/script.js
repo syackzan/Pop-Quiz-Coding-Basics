@@ -2,7 +2,7 @@ console.log("Hello");
 
 // Global Variables //
 var scoreCount = 0;
-var timer = 150;
+var timer = 75;
 var timerInterval;
 
 // querySelectors with Console Logs to Confirm if retreivals are workings //
@@ -174,6 +174,7 @@ function storeScore (event){
 
     if (element.matches("button")){
 
+        timerCheck(element);
         clearInterval(timerInterval);
         // Removing Buttons From HTML //
         headerOne.textContent = "All Done!";
@@ -209,11 +210,11 @@ function questionFive (event){
         timerCheck(element);  
 
         // Adding New Question & Answer Text //
-        headerOne.textContent = "Which country is home to Samurai's?";
-        button1.textContent = "China";
-        button2.textContent = "Japan";
-        button3.textContent = "Canada";
-        button4.textContent = "Korea";
+        headerOne.textContent = "What does javascript use instead of == and !=?";
+        button1.textContent = "It uses bitwise checking.";
+        button2.textContent = "It uses === and !== instead.";
+        button3.textContent = "It uses equals() and notequals().";
+        button4.textContent = "All of the above.";
 
         // True False Answers //
         button1.value = "false";
@@ -244,17 +245,17 @@ function questionFour (event){
         timerCheck(element);    
 
         // Adding New Question & Answer Text //
-        headerOne.textContent = "How many Fingers do we have?";
-        button1.textContent = "Five";
-        button2.textContent = "Twenty";
-        button3.textContent = "Ten";
-        button4.textContent = "One";
+        headerOne.textContent = "Which of the following is correct about features of JavaScript?";
+        button1.textContent = "It can not Handle Dates and times.";
+        button2.textContent = "JavaScript is a object-based Scripting language.";
+        button3.textContent = "JavaScript is not interpreter based scripting language.";
+        button4.textContent = "All of the above";
 
         // True False Answers //
         button1.value = "false";
         button2.value = "false";
-        button3.value = "true";
-        button4.value = "false";
+        button3.value = "false";
+        button4.value = "true";
 
         buttonBox4.addEventListener("click", function (event){
             questionFive (event);
@@ -278,17 +279,17 @@ function questionThree (event){
         timerCheck(element);
 
         // Adding New Question & Answer Text //
-        headerOne.textContent = "What state is Mount Rushmore in?";
-        button1.textContent = "California";
-        button2.textContent = "Minnesota";
-        button3.textContent = "South Dakota";
-        button4.textContent = "North Dakota";
+        headerOne.textContent = "Inside which HTML element do we put the JavaScript?";
+        button1.textContent = "<meta>";
+        button2.textContent = "<head>";
+        button3.textContent = "<script>";
+        button4.textContent = "<style>";
 
         // True False Answers //
         button1.value = "false";
         button2.value = "false";
-        button3.value = "false";
-        button4.value = "true";
+        button3.value = "true";
+        button4.value = "false";
 
         buttonBox3.addEventListener("click", function (event){
             questionFour (event);
@@ -314,11 +315,11 @@ function questionTwo (event){
         timerCheck(element);
 
         // Adding New Question & Answer Text //
-        headerOne.textContent = "Are Tomato's Fruits or Vegetables?";
-        button1.textContent = "Fruits";
-        button2.textContent = "Vegetables";
-        button3.textContent = "Shut Up";
-        button4.textContent = "All of the Above";
+        headerOne.textContent = "Which company developed JavaScript?";
+        button1.textContent = "Netscape";
+        button2.textContent = "Bell Labs";
+        button3.textContent = "Sun Microsystems";
+        button4.textContent = "IBM";
 
         // True False Answers //
         button1.value = "true";
@@ -338,7 +339,7 @@ function startQuiz (){
     
     
     // Changing Initial HTML Elements to Quiz Format //
-    headerOne.textContent = "Who is the greatest business man to ever Walk the Earth?";
+    headerOne.textContent = "Which of the following is not JavaScript Data Types?";
     description.textContent = " ";
     description.setAttribute ("style", "margin: 0px; border: none");
     startButton.style.display = "none";
@@ -353,10 +354,10 @@ function startQuiz (){
     appButtons1();
 
     // Adding Text to New Appended Buttons //
-    button1.textContent = "Steve Jobs";
-    button2.textContent = "Mark Zuckerberg";
-    button3.textContent = "Elon Musk";
-    button4.textContent = "Jeff Bezos";
+    button1.textContent = "Undefined";
+    button2.textContent = "Number";
+    button3.textContent = "Boolean";
+    button4.textContent = "Float";
 
     // True False Answers //
     button1.value = "false";
@@ -406,6 +407,7 @@ buttonBox1.appendChild (button4);
 }
 
 function appButtons2(){
+    buttonBox1.remove();
     buttonBox2.innerHTML = "";
     buttonBox2.appendChild (button1);
     buttonBox2.appendChild (button2);
@@ -414,6 +416,7 @@ function appButtons2(){
 }
 
 function appButtons3(){
+    buttonBox2.remove();
     buttonBox3.innerHTML = "";
     buttonBox3.appendChild (button1);
     buttonBox3.appendChild (button2);
@@ -422,6 +425,7 @@ function appButtons3(){
 }
 
 function appButtons4(){
+    buttonBox3.remove();
     buttonBox4.innerHTML = "";
     buttonBox4.appendChild (button1);
     buttonBox4.appendChild (button2);
@@ -430,6 +434,7 @@ function appButtons4(){
 }
 
 function appButtons5(){
+    buttonBox4.remove();
     buttonBox5.innerHTML = "";
     buttonBox5.appendChild (button1);
     buttonBox5.appendChild (button2);
