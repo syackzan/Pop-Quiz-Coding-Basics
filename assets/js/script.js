@@ -36,6 +36,7 @@ var inputingScore = document.createElement ("li");
 var ol = document.createElement ("ol");
 
 var allScores = [];
+var HS = [];
 var zzzz = [];
 
 // Functions //
@@ -64,10 +65,10 @@ function timerCountdown (){
 
 function renderHighS () {
     var HS = JSON.parse(localStorage.getItem("userInfo"));
-
-    if (HS !== null){
-        allScores = HS;
-    }
+    console.log(HS);
+    
+    allScores = HS;
+    
 
     for (var i = 0; i < allScores.length; i++) {
         var oneScore = allScores[i];
@@ -77,25 +78,19 @@ function renderHighS () {
 
         ol.appendChild(li);
       }
-
-    var storedInitials = allScores.initials;
-    var storedScores = allScores.score;
-    
-    description.appendChild (ol);
-    ol.appendChild (inputingScore);
-    ol.setAttribute ("style", "list-style-position: inside; margin-left: -30px");
-    inputingScore.textContent = "Initials: " + storedInitials + " Time: " + storedScores;
 }
 
 // Updating Score //
 function updatingScore (input){
     console.log(timer);
+    console.log(input.value);
     if (input != null){
         var userInfo = {
             initials: input.value,
             score: timer
         }
         zzzz.push(userInfo);
+        console.log(zzzz);
         localStorage.setItem("userInfo", JSON.stringify(zzzz));
     }
     
@@ -112,6 +107,7 @@ function highScoreForm (){
     reveal.style.display = "none";
     description.textContent = "";
     description.appendChild (ol);
+    ol.setAttribute ("style", "list-style-position: inside; margin-left: -30px");
     description.style.flexDirection = "column";
     answerBox.appendChild(resetB);
     answerBox.appendChild(clearScoreB);
@@ -144,12 +140,10 @@ function changeForm (){
     submitB.setAttribute ("type", "submit");
     submitB.setAttribute ("value", "Submit");
     submitB.setAttribute ("style", "margin: 0px 10px; font-size: 24px; background-color: purple; color: white");
-
-    return input;
 }
 
 // View High Scores Menu //
-function viewHighScores (input){
+function viewHighScores (){
     
     // Removing Buttons From HTML //
     highScoreForm ();
@@ -181,10 +175,10 @@ function storeScore (event){
         button3.style.display = "none";
         button4.style.display = "none";
         
-        var returnElementInput = changeForm();
-        console.log(input);
-        var userNameInput = returnElementInput.value;
-        console.log(userNameInput);
+        changeForm();
+        
+        //var userNameInput = returnElementInput.value;
+        //console.log(userNameInput);
 
         submitB.addEventListener("click", function (){
             viewHighScores ();
