@@ -37,7 +37,6 @@ var ol = document.createElement ("ol");
 
 var allScores = [];
 var HS = [];
-var addToCompleteList = [];
 
 // Functions //
 
@@ -81,19 +80,24 @@ function renderHighS () {
 }
 
 // Updating Score //
-function updatingScore (input){
+function updatingScore (){
 
     var completeList = JSON.parse(localStorage.getItem("userInfo"));
-    addToCompleteList = completeList;
+    var addToCompleteList = []
+    
+    if (completeList != null){
+        addToCompleteList = completeList;
+    }
     
     if (input != null){
-        
+
         var userInfo = {
             initials: input.value,
             score: timer
         }
-
+    console.log(userInfo);
     addToCompleteList.push(userInfo);
+
     localStorage.setItem("userInfo", JSON.stringify(addToCompleteList));
     }
     
@@ -150,7 +154,7 @@ function viewHighScores (){
     
     // Removing Buttons From HTML //
     highScoreForm ();
-    updatingScore (input);
+    updatingScore ();
     
     event.stopPropagation()
     resetB.addEventListener("click", function (){
@@ -299,15 +303,15 @@ function questionTwo (event){
 
     if (element.matches("button")){
 
+        userBox.appendChild (reveal);
+        reveal.setAttribute ("style", "font-size: 16px; color: gray; font-style: italic; border-bottom: solid 2px gray; padding-bottom: 10px;")
+        
         buttonBox1.innerHTML = "";
         userBox.appendChild(buttonBox2);
         buttonBox2.setAttribute ("style", "display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start; border-bottom: solid 1px gray;");
         appButtons2(); 
 
         timerCheck(element);
-
-        userBox.appendChild (reveal);
-        reveal.setAttribute ("style", "font-size: 16px; color: gray; font-style: italic;")
 
         // Adding New Question & Answer Text //
         headerOne.textContent = "Are Tomato's Fruits or Vegetables?";
@@ -378,13 +382,13 @@ function timerCheck(element){
     if (element.value == "true"){
         scoreCount++;
         count.textContent = "Answered Correct: " + scoreCount;
-        reveal.textContent = "Correct!";
+        reveal.textContent = "You answered the last question Correct!";
     } else {
         
         if (timer >= 10){
             timer = timer - 10;
             timerHTML.textContent = "Timer: " + timer;
-            reveal.textContent = "Wrong!";
+            reveal.textContent = "You answered the last question Wrong!";
         } else {
             timer = 0;
             timerHTML.textContent = "Timer: " + timer;
