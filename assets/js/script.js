@@ -37,7 +37,7 @@ var ol = document.createElement ("ol");
 
 var allScores = [];
 var HS = [];
-var zzzz = [];
+var addToCompleteList = [];
 
 // Functions //
 
@@ -82,16 +82,19 @@ function renderHighS () {
 
 // Updating Score //
 function updatingScore (input){
-    console.log(timer);
-    console.log(input.value);
+
+    var completeList = JSON.parse(localStorage.getItem("userInfo"));
+    addToCompleteList = completeList;
+    
     if (input != null){
+        
         var userInfo = {
             initials: input.value,
             score: timer
         }
-        zzzz.push(userInfo);
-        console.log(zzzz);
-        localStorage.setItem("userInfo", JSON.stringify(zzzz));
+
+    addToCompleteList.push(userInfo);
+    localStorage.setItem("userInfo", JSON.stringify(addToCompleteList));
     }
     
     renderHighS ();
