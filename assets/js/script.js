@@ -54,6 +54,7 @@ function timerCountdown (){
         if (timer <= 0){
             clearInterval (timerInterval);
             alert("Fail");
+            location.reload();
         }
 
         if (timer.value === "true"){
